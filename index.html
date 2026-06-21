@@ -7,143 +7,63 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family: "宋体", "微软雅黑", sans-serif; }
         body { padding:20px; max-width:1600px; margin:0 auto; position:relative; }
-
-        .switch-btn { 
-            position:absolute; top:12px; left:12px; width:32px; height:32px; 
-            border:1px solid #333; background:#fff; cursor:pointer; 
-            display:flex; align-items:center; justify-content:center; 
-            font-size:16px; z-index:100; border-radius:3px;
-        }
+        .switch-btn { position:absolute; top:12px; left:12px; width:32px; height:32px; border:1px solid #333; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; z-index:100; border-radius:3px; }
         .switch-btn:hover { background:#f0f0f0; }
-
-        .title-wrap { 
-            text-align:center; margin-bottom:6px; 
-            display:flex; align-items:center; justify-content:center; gap:12px;
-        }
+        .title-wrap { text-align:center; margin-bottom:6px; display:flex; align-items:center; justify-content:center; gap:12px; }
         .title { font-size:20px; font-weight:bold; }
-        .status-pill {
-            display:inline-flex; align-items:center; gap:5px;
-            font-size:12px; padding:3px 10px; border-radius:12px;
-            border:1px solid #ccc; background:#f5f5f5; color:#555;
-        }
-        .status-pill .dot {
-            width:8px; height:8px; border-radius:50%; display:inline-block;
-        }
+        .status-pill { display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:3px 10px; border-radius:12px; border:1px solid #ccc; background:#f5f5f5; color:#555; }
+        .status-pill .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
         .status-pill .dot.on { background:#4caf50; }
         .status-pill .dot.off { background:#9e9e9e; }
         .status-pill .dot.wait { background:#ff9800; }
-
         .standard { text-align:center; font-size:14px; margin-bottom:10px; color:#555; }
-
         .btn-bar { text-align:center; margin-bottom:12px; }
-        .btn-bar button { 
-            margin:0 6px; padding:6px 18px; font-size:13px; cursor:pointer; 
-            border:1px solid #333; background:#f5f5f5; border-radius:3px; 
-        }
+        .btn-bar button { margin:0 6px; padding:6px 18px; font-size:13px; cursor:pointer; border:1px solid #333; background:#f5f5f5; border-radius:3px; }
         .btn-bar button:hover { background:#e0e0e0; }
         .btn-bar .primary { background:#2c3e50; color:#fff; border-color:#2c3e50; }
         .btn-bar .primary:hover { background:#34495e; }
-
-        .table-container { 
-            width:100%; overflow-x:auto; overflow-y:auto; 
-            max-height:850px; border:2px solid #000; margin-bottom:25px; 
-        }
+        .table-container { width:100%; overflow-x:auto; overflow-y:auto; max-height:850px; border:2px solid #000; margin-bottom:25px; }
         table { width:100%; border-collapse:collapse; white-space:nowrap; }
-
-        th, td { 
-            border:1px solid #000; padding:7px 5px; 
-            text-align:center; font-size:13px; 
-        }
-        th { 
-            background:#f8f9fa; font-weight:bold; 
-            position:sticky; top:0; z-index:10; 
-        }
-
-        .am-header { 
-            background:#bbdefb !important; 
-            border-left:3px solid #1565c0 !important; 
-            border-right:3px solid #1565c0 !important;
-            border-top:3px solid #1565c0 !important;
-            font-size:15px; color:#0d47a1; letter-spacing:2px;
-        }
-        .pm-header { 
-            background:#ffe0b2 !important; 
-            border-left:3px solid #ef6c00 !important; 
-            border-right:3px solid #ef6c00 !important;
-            border-top:3px solid #ef6c00 !important;
-            font-size:15px; color:#e65100; letter-spacing:2px;
-        }
-
+        th, td { border:1px solid #000; padding:7px 5px; text-align:center; font-size:13px; }
+        th { background:#f8f9fa; font-weight:bold; position:sticky; top:0; z-index:10; }
+        .am-header { background:#bbdefb !important; border-left:3px solid #1565c0 !important; border-right:3px solid #1565c0 !important; border-top:3px solid #1565c0 !important; font-size:15px; color:#0d47a1; letter-spacing:2px; }
+        .pm-header { background:#ffe0b2 !important; border-left:3px solid #ef6c00 !important; border-right:3px solid #ef6c00 !important; border-top:3px solid #ef6c00 !important; font-size:15px; color:#e65100; letter-spacing:2px; }
         .am-group { border-left:2px solid #1976d2; border-right:2px solid #1976d2; }
         .pm-group { border-left:2px solid #f57c00; border-right:2px solid #f57c00; }
-
-        .date-col { min-width:105px; font-weight:bold; }
+        .date-col { min-width:75px; font-weight:bold; font-size:12px; }
         .temp-col { min-width:55px; }
         .humi-col { min-width:55px; }
         .measure-col { min-width:95px; }
         .sign-col { min-width:75px; }
-
-        td[contenteditable="true"] { 
-            background:#fffde7; cursor:text; 
-        }
-        td[contenteditable="true"]:focus { 
-            background:#fff9c4; 
-            box-shadow:inset 0 0 0 2px #3498db; 
-            outline:none;
-        }
-
-        td.locked { 
-            background:#e8f5e9; cursor:default; 
-        }
-
+        td[contenteditable="true"] { background:#fffde7; cursor:text; }
+        td[contenteditable="true"]:focus { background:#fff9c4; box-shadow:inset 0 0 0 2px #3498db; outline:none; }
+        td.locked { background:#e8f5e9; cursor:default; }
         td .empty { color:#bbb; font-style:italic; pointer-events:none; }
-
         .measure-ok { color:#2e7d32; font-weight:bold; }
         .measure-warn { color:#c62828; font-weight:bold; }
-
         #table2-container { display:none; }
     </style>
 <base target="_blank">
 </head>
 <body>
-
 <button class="switch-btn" id="switchBtn" title="切换表格">⇄</button>
 
 <div id="table1-container">
     <div class="title-wrap">
         <div class="title">瑞年大药房温湿度监测调控记录</div>
-        <span class="status-pill" id="status1">
-            <span class="dot wait" id="dot1"></span>
-            <span id="txt1">等待15:00自动更新</span>
-        </span>
+        <span class="status-pill" id="status1"><span class="dot wait" id="dot1"></span><span id="txt1">等待自动更新</span></span>
     </div>
     <div class="standard">适宜温度范围 0—30 摄氏度，适宜相对湿度 45%—65%</div>
     <div class="btn-bar">
         <button class="primary" onclick="addTodayRow('tableBody1')">➕ 新增</button>
         <button onclick="forceUnlockToday('tableBody1')">🔓 修改</button>
+        <button onclick="fillMissingDates('tableBody1')">📋 补录缺失</button>
     </div>
     <div class="table-container">
         <table>
             <thead>
-                <tr>
-                    <th class="date-col" rowspan="2">日期</th>
-                    <th class="am-header" colspan="6">【上午 10：00】</th>
-                    <th class="pm-header" colspan="6">【下午 15：00】</th>
-                </tr>
-                <tr>
-                    <th class="am-group">温度<br><small>(℃)</small></th>
-                    <th>湿度<br><small>(%)</small></th>
-                    <th>调控措施</th>
-                    <th>调控后温度</th>
-                    <th>调控后湿度</th>
-                    <th class="am-group">记录员</th>
-                    <th class="pm-group">温度<br><small>(℃)</small></th>
-                    <th>湿度<br><small>(%)</small></th>
-                    <th>调控措施</th>
-                    <th>调控后温度</th>
-                    <th>调控后湿度</th>
-                    <th class="pm-group">记录员</th>
-                </tr>
+                <tr><th class="date-col" rowspan="2">日期</th><th class="am-header" colspan="6">【上午 10：00】</th><th class="pm-header" colspan="6">【下午 15：00】</th></tr>
+                <tr><th class="am-group">温度<br><small>(℃)</small></th><th>湿度<br><small>(%)</small></th><th>调控措施</th><th>调控后温度</th><th>调控后湿度</th><th class="am-group">记录员</th><th class="pm-group">温度<br><small>(℃)</small></th><th>湿度<br><small>(%)</small></th><th>调控措施</th><th>调控后温度</th><th>调控后湿度</th><th class="pm-group">记录员</th></tr>
             </thead>
             <tbody id="tableBody1"></tbody>
         </table>
@@ -153,38 +73,19 @@
 <div id="table2-container">
     <div class="title-wrap">
         <div class="title">天龙药业连锁温湿度监测调控记录</div>
-        <span class="status-pill" id="status2">
-            <span class="dot wait" id="dot2"></span>
-            <span id="txt2">等待15:00自动更新</span>
-        </span>
+        <span class="status-pill" id="status2"><span class="dot wait" id="dot2"></span><span id="txt2">等待自动更新</span></span>
     </div>
     <div class="standard">适宜温度范围 0—30 摄氏度，适宜相对湿度 45%—65%</div>
     <div class="btn-bar">
         <button class="primary" onclick="addTodayRow('tableBody2')">➕ 新增</button>
         <button onclick="forceUnlockToday('tableBody2')">🔓 修改</button>
+        <button onclick="fillMissingDates('tableBody2')">📋 补录</button>
     </div>
     <div class="table-container">
         <table>
             <thead>
-                <tr>
-                    <th class="date-col" rowspan="2">日期</th>
-                    <th class="am-header" colspan="6">【上午 10：00】</th>
-                    <th class="pm-header" colspan="6">【下午 15：00】</th>
-                </tr>
-                <tr>
-                    <th class="am-group">温度<br><small>(℃)</small></th>
-                    <th>湿度<br><small>(%)</small></th>
-                    <th>调控措施</th>
-                    <th>调控后温度</th>
-                    <th>调控后湿度</th>
-                    <th class="am-group">记录员</th>
-                    <th class="pm-group">温度<br><small>(℃)</small></th>
-                    <th>湿度<br><small>(%)</small></th>
-                    <th>调控措施</th>
-                    <th>调控后温度</th>
-                    <th>调控后湿度</th>
-                    <th class="pm-group">记录员</th>
-                </tr>
+                <tr><th class="date-col" rowspan="2">日期</th><th class="am-header" colspan="6">【上午 10：00】</th><th class="pm-header" colspan="6">【下午 15：00】</th></tr>
+                <tr><th class="am-group">温度<br><small>(℃)</small></th><th>湿度<br><small>(%)</small></th><th>调控措施</th><th>调控后温度</th><th>调控后湿度</th><th class="am-group">记录员</th><th class="pm-group">温度<br><small>(℃)</small></th><th>湿度<br><small>(%)</small></th><th>调控措施</th><th>调控后温度</th><th>调控后湿度</th><th class="pm-group">记录员</th></tr>
             </thead>
             <tbody id="tableBody2"></tbody>
         </table>
@@ -192,22 +93,19 @@
 </div>
 
 <script>
-// ========== 本地存储键名 ==========
-const STORAGE_KEY = 'wenshidu_records_v6';
+const STORAGE_KEY = 'wenshidu_records_v8';
 const RECORDER_NAME = '蔡伟斌';
 
-// ========== 预填充数据（2026-05-15 到 2026-06-20）+ 今天am已填 ==========
 const PRELOAD_DATA = {
-    table1: [{"date": "2026-05-15", "amTemp": "24.3", "amHumi": "48", "amMeasure": "符合标准", "amAfterTemp": "24.3", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "23.8", "pmHumi": "52", "pmMeasure": "符合标准", "pmAfterTemp": "23.8", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-16", "amTemp": "20.5", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "20.5", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "28.5", "pmHumi": "63", "pmMeasure": "符合标准", "pmAfterTemp": "28.5", "pmAfterHumi": "63", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-17", "amTemp": "25.0", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "25.0", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "26.4", "pmHumi": "66", "pmMeasure": "开空调除湿", "pmAfterTemp": "26.4", "pmAfterHumi": "66", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-18", "amTemp": "25.4", "amHumi": "49", "amMeasure": "符合标准", "amAfterTemp": "25.4", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-19", "amTemp": "25.0", "amHumi": "55", "amMeasure": "符合标准", "amAfterTemp": "25.0", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "22.7", "pmHumi": "48", "pmMeasure": "符合标准", "pmAfterTemp": "22.7", "pmAfterHumi": "48", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-20", "amTemp": "21.9", "amHumi": "69", "amMeasure": "开空调除湿", "amAfterTemp": "21.9", "amAfterHumi": "69", "amSign": "蔡伟斌", "pmTemp": "25.4", "pmHumi": "67", "pmMeasure": "开空调除湿", "pmAfterTemp": "25.4", "pmAfterHumi": "67", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-21", "amTemp": "24.1", "amHumi": "61", "amMeasure": "符合标准", "amAfterTemp": "24.1", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "21.8", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "21.8", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-22", "amTemp": "24.4", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "24.4", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "23.5", "pmHumi": "67", "pmMeasure": "开空调除湿", "pmAfterTemp": "23.5", "pmAfterHumi": "67", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-23", "amTemp": "27.1", "amHumi": "45", "amMeasure": "符合标准", "amAfterTemp": "27.1", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "60", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "60", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-24", "amTemp": "22.1", "amHumi": "59", "amMeasure": "符合标准", "amAfterTemp": "22.1", "amAfterHumi": "59", "amSign": "蔡伟斌", "pmTemp": "26.3", "pmHumi": "59", "pmMeasure": "符合标准", "pmAfterTemp": "26.3", "pmAfterHumi": "59", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-25", "amTemp": "20.9", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "20.9", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "27.5", "pmHumi": "49", "pmMeasure": "符合标准", "pmAfterTemp": "27.5", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-26", "amTemp": "21.9", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "21.9", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "29.8", "pmHumi": "47", "pmMeasure": "符合标准", "pmAfterTemp": "29.8", "pmAfterHumi": "47", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-27", "amTemp": "29.6", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "29.6", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "28.3", "pmHumi": "69", "pmMeasure": "开空调除湿", "pmAfterTemp": "28.3", "pmAfterHumi": "69", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-28", "amTemp": "24.3", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "24.3", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "25.8", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "25.8", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-29", "amTemp": "27.8", "amHumi": "46", "amMeasure": "符合标准", "amAfterTemp": "27.8", "amAfterHumi": "46", "amSign": "蔡伟斌", "pmTemp": "26.4", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "26.4", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-30", "amTemp": "25.5", "amHumi": "58", "amMeasure": "符合标准", "amAfterTemp": "25.5", "amAfterHumi": "58", "amSign": "蔡伟斌", "pmTemp": "29.0", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "29.0", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-31", "amTemp": "24.7", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "24.7", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "24.4", "pmHumi": "50", "pmMeasure": "符合标准", "pmAfterTemp": "24.4", "pmAfterHumi": "50", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-01", "amTemp": "27.9", "amHumi": "46", "amMeasure": "符合标准", "amAfterTemp": "27.9", "amAfterHumi": "46", "amSign": "蔡伟斌", "pmTemp": "29.6", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "29.6", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-02", "amTemp": "28.7", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "28.7", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "26.0", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "26.0", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-03", "amTemp": "20.6", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "20.6", "amAfterHumi": "68", "amSign": "蔡伟斌", "pmTemp": "24.4", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "24.4", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-04", "amTemp": "27.2", "amHumi": "45", "amMeasure": "符合标准", "amAfterTemp": "27.2", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "25.3", "pmHumi": "51", "pmMeasure": "符合标准", "pmAfterTemp": "25.3", "pmAfterHumi": "51", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-05", "amTemp": "27.5", "amHumi": "53", "amMeasure": "符合标准", "amAfterTemp": "27.5", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "21.5", "pmHumi": "61", "pmMeasure": "符合标准", "pmAfterTemp": "21.5", "pmAfterHumi": "61", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-06", "amTemp": "21.0", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "21.0", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "28.5", "pmHumi": "56", "pmMeasure": "符合标准", "pmAfterTemp": "28.5", "pmAfterHumi": "56", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-07", "amTemp": "20.1", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "20.1", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "29.2", "pmHumi": "68", "pmMeasure": "开空调除湿", "pmAfterTemp": "29.2", "pmAfterHumi": "68", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-08", "amTemp": "23.1", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "23.1", "amAfterHumi": "66", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-09", "amTemp": "27.0", "amHumi": "49", "amMeasure": "符合标准", "amAfterTemp": "27.0", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "22.3", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "22.3", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-10", "amTemp": "23.3", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "23.3", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "24.5", "pmHumi": "54", "pmMeasure": "符合标准", "pmAfterTemp": "24.5", "pmAfterHumi": "54", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-11", "amTemp": "26.0", "amHumi": "65", "amMeasure": "符合标准", "amAfterTemp": "26.0", "amAfterHumi": "65", "amSign": "蔡伟斌", "pmTemp": "30.0", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "30.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-12", "amTemp": "28.6", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "28.6", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-13", "amTemp": "22.7", "amHumi": "61", "amMeasure": "符合标准", "amAfterTemp": "22.7", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "24.9", "pmHumi": "48", "pmMeasure": "符合标准", "pmAfterTemp": "24.9", "pmAfterHumi": "48", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-14", "amTemp": "22.8", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "22.8", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "21.1", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "21.1", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-15", "amTemp": "20.9", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "20.9", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "21.9", "pmHumi": "70", "pmMeasure": "开空调除湿", "pmAfterTemp": "21.9", "pmAfterHumi": "70", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-16", "amTemp": "28.5", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "28.5", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "29.0", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "29.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-17", "amTemp": "23.4", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "23.4", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-18", "amTemp": "25.7", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "25.7", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "24.8", "pmHumi": "51", "pmMeasure": "符合标准", "pmAfterTemp": "24.8", "pmAfterHumi": "51", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-19", "amTemp": "28.6", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "28.6", "amAfterHumi": "66", "amSign": "蔡伟斌", "pmTemp": "27.2", "pmHumi": "50", "pmMeasure": "符合标准", "pmAfterTemp": "27.2", "pmAfterHumi": "50", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-20", "amTemp": "26.3", "amHumi": "55", "amMeasure": "符合标准", "amAfterTemp": "26.3", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "28.0", "pmHumi": "49", "pmMeasure": "符合标准", "pmAfterTemp": "28.0", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-21", "amTemp": "29.1", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "29.1", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "", "pmHumi": "", "pmMeasure": "", "pmAfterTemp": "", "pmAfterHumi": "", "pmSign": "", "locked": false}],
-    table2: [{"date": "2026-05-15", "amTemp": "24.3", "amHumi": "48", "amMeasure": "符合标准", "amAfterTemp": "24.3", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "23.8", "pmHumi": "52", "pmMeasure": "符合标准", "pmAfterTemp": "23.8", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-16", "amTemp": "20.5", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "20.5", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "28.5", "pmHumi": "63", "pmMeasure": "符合标准", "pmAfterTemp": "28.5", "pmAfterHumi": "63", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-17", "amTemp": "25.0", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "25.0", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "26.4", "pmHumi": "66", "pmMeasure": "开空调除湿", "pmAfterTemp": "26.4", "pmAfterHumi": "66", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-18", "amTemp": "25.4", "amHumi": "49", "amMeasure": "符合标准", "amAfterTemp": "25.4", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-19", "amTemp": "25.0", "amHumi": "55", "amMeasure": "符合标准", "amAfterTemp": "25.0", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "22.7", "pmHumi": "48", "pmMeasure": "符合标准", "pmAfterTemp": "22.7", "pmAfterHumi": "48", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-20", "amTemp": "21.9", "amHumi": "69", "amMeasure": "开空调除湿", "amAfterTemp": "21.9", "amAfterHumi": "69", "amSign": "蔡伟斌", "pmTemp": "25.4", "pmHumi": "67", "pmMeasure": "开空调除湿", "pmAfterTemp": "25.4", "pmAfterHumi": "67", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-21", "amTemp": "24.1", "amHumi": "61", "amMeasure": "符合标准", "amAfterTemp": "24.1", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "21.8", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "21.8", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-22", "amTemp": "24.4", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "24.4", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "23.5", "pmHumi": "67", "pmMeasure": "开空调除湿", "pmAfterTemp": "23.5", "pmAfterHumi": "67", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-23", "amTemp": "27.1", "amHumi": "45", "amMeasure": "符合标准", "amAfterTemp": "27.1", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "60", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "60", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-24", "amTemp": "22.1", "amHumi": "59", "amMeasure": "符合标准", "amAfterTemp": "22.1", "amAfterHumi": "59", "amSign": "蔡伟斌", "pmTemp": "26.3", "pmHumi": "59", "pmMeasure": "符合标准", "pmAfterTemp": "26.3", "pmAfterHumi": "59", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-25", "amTemp": "20.9", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "20.9", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "27.5", "pmHumi": "49", "pmMeasure": "符合标准", "pmAfterTemp": "27.5", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-26", "amTemp": "21.9", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "21.9", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "29.8", "pmHumi": "47", "pmMeasure": "符合标准", "pmAfterTemp": "29.8", "pmAfterHumi": "47", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-27", "amTemp": "29.6", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "29.6", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "28.3", "pmHumi": "69", "pmMeasure": "开空调除湿", "pmAfterTemp": "28.3", "pmAfterHumi": "69", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-28", "amTemp": "24.3", "amHumi": "60", "amMeasure": "符合标准", "amAfterTemp": "24.3", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "25.8", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "25.8", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-29", "amTemp": "27.8", "amHumi": "46", "amMeasure": "符合标准", "amAfterTemp": "27.8", "amAfterHumi": "46", "amSign": "蔡伟斌", "pmTemp": "26.4", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "26.4", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-30", "amTemp": "25.5", "amHumi": "58", "amMeasure": "符合标准", "amAfterTemp": "25.5", "amAfterHumi": "58", "amSign": "蔡伟斌", "pmTemp": "29.0", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "29.0", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-05-31", "amTemp": "24.7", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "24.7", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "24.4", "pmHumi": "50", "pmMeasure": "符合标准", "pmAfterTemp": "24.4", "pmAfterHumi": "50", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-01", "amTemp": "27.9", "amHumi": "46", "amMeasure": "符合标准", "amAfterTemp": "27.9", "amAfterHumi": "46", "amSign": "蔡伟斌", "pmTemp": "29.6", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "29.6", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-02", "amTemp": "28.7", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "28.7", "amAfterHumi": "70", "amSign": "蔡伟斌", "pmTemp": "26.0", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "26.0", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-03", "amTemp": "20.6", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "20.6", "amAfterHumi": "68", "amSign": "蔡伟斌", "pmTemp": "24.4", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "24.4", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-04", "amTemp": "27.2", "amHumi": "45", "amMeasure": "符合标准", "amAfterTemp": "27.2", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "25.3", "pmHumi": "51", "pmMeasure": "符合标准", "pmAfterTemp": "25.3", "pmAfterHumi": "51", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-05", "amTemp": "27.5", "amHumi": "53", "amMeasure": "符合标准", "amAfterTemp": "27.5", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "21.5", "pmHumi": "61", "pmMeasure": "符合标准", "pmAfterTemp": "21.5", "pmAfterHumi": "61", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-06", "amTemp": "21.0", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "21.0", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "28.5", "pmHumi": "56", "pmMeasure": "符合标准", "pmAfterTemp": "28.5", "pmAfterHumi": "56", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-07", "amTemp": "20.1", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "20.1", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "29.2", "pmHumi": "68", "pmMeasure": "开空调除湿", "pmAfterTemp": "29.2", "pmAfterHumi": "68", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-08", "amTemp": "23.1", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "23.1", "amAfterHumi": "66", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-09", "amTemp": "27.0", "amHumi": "49", "amMeasure": "符合标准", "amAfterTemp": "27.0", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "22.3", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "22.3", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-10", "amTemp": "23.3", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "23.3", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "24.5", "pmHumi": "54", "pmMeasure": "符合标准", "pmAfterTemp": "24.5", "pmAfterHumi": "54", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-11", "amTemp": "26.0", "amHumi": "65", "amMeasure": "符合标准", "amAfterTemp": "26.0", "amAfterHumi": "65", "amSign": "蔡伟斌", "pmTemp": "30.0", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "30.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-12", "amTemp": "28.6", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "28.6", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "55", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-13", "amTemp": "22.7", "amHumi": "61", "amMeasure": "符合标准", "amAfterTemp": "22.7", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "24.9", "pmHumi": "48", "pmMeasure": "符合标准", "pmAfterTemp": "24.9", "pmAfterHumi": "48", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-14", "amTemp": "22.8", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "22.8", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "21.1", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "21.1", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-15", "amTemp": "20.9", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "20.9", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "21.9", "pmHumi": "70", "pmMeasure": "开空调除湿", "pmAfterTemp": "21.9", "pmAfterHumi": "70", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-16", "amTemp": "28.5", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "28.5", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "29.0", "pmHumi": "62", "pmMeasure": "符合标准", "pmAfterTemp": "29.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-17", "amTemp": "23.4", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "23.4", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-18", "amTemp": "25.7", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "25.7", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "24.8", "pmHumi": "51", "pmMeasure": "符合标准", "pmAfterTemp": "24.8", "pmAfterHumi": "51", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-19", "amTemp": "28.6", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "28.6", "amAfterHumi": "66", "amSign": "蔡伟斌", "pmTemp": "27.2", "pmHumi": "50", "pmMeasure": "符合标准", "pmAfterTemp": "27.2", "pmAfterHumi": "50", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-20", "amTemp": "26.3", "amHumi": "55", "amMeasure": "符合标准", "amAfterTemp": "26.3", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "28.0", "pmHumi": "49", "pmMeasure": "符合标准", "pmAfterTemp": "28.0", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "2026-06-21", "amTemp": "29.1", "amHumi": "47", "amMeasure": "符合标准", "amAfterTemp": "29.1", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "", "pmHumi": "", "pmMeasure": "", "pmAfterTemp": "", "pmAfterHumi": "", "pmSign": "", "locked": false}],
-    lastAmUpdate: "2026-06-21",
-    lastPmUpdate: "2026-06-20"
+    table1: [{"date": "26-05-15", "amTemp": "25.0", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "25.0", "amAfterHumi": "65", "amSign": "蔡伟斌", "pmTemp": "21.9", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "21.9", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-16", "amTemp": "31.4", "amHumi": "62", "amMeasure": "开空调降温", "amAfterTemp": "24.6", "amAfterHumi": "62", "amSign": "蔡伟斌", "pmTemp": "30.0", "pmHumi": "41", "pmMeasure": "符合标准", "pmAfterTemp": "30.0", "pmAfterHumi": "41", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-17", "amTemp": "33.1", "amHumi": "41", "amMeasure": "开空调降温", "amAfterTemp": "27.3", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-18", "amTemp": "22.0", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "22.0", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "43", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "43", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-19", "amTemp": "26.1", "amHumi": "57", "amMeasure": "符合标准", "amAfterTemp": "26.1", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "22.8", "pmHumi": "66", "pmMeasure": "开空调除湿", "pmAfterTemp": "22.8", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-20", "amTemp": "30.8", "amHumi": "61", "amMeasure": "开空调降温", "amAfterTemp": "25.2", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "34.4", "pmHumi": "67", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "22.3", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-21", "amTemp": "29.6", "amHumi": "44", "amMeasure": "符合标准", "amAfterTemp": "29.6", "amAfterHumi": "44", "amSign": "蔡伟斌", "pmTemp": "27.6", "pmHumi": "71", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.6", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-22", "amTemp": "28.5", "amHumi": "43", "amMeasure": "符合标准", "amAfterTemp": "28.5", "amAfterHumi": "43", "amSign": "蔡伟斌", "pmTemp": "32.7", "pmHumi": "80", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "27.7", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-23", "amTemp": "28.1", "amHumi": "40", "amMeasure": "符合标准", "amAfterTemp": "28.1", "amAfterHumi": "40", "amSign": "蔡伟斌", "pmTemp": "24.9", "pmHumi": "42", "pmMeasure": "符合标准", "pmAfterTemp": "24.9", "pmAfterHumi": "42", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-24", "amTemp": "30.2", "amHumi": "57", "amMeasure": "开空调降温", "amAfterTemp": "26.3", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "21.0", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "21.0", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-25", "amTemp": "34.5", "amHumi": "54", "amMeasure": "开空调降温", "amAfterTemp": "27.4", "amAfterHumi": "54", "amSign": "蔡伟斌", "pmTemp": "32.7", "pmHumi": "40", "pmMeasure": "开空调降温", "pmAfterTemp": "22.8", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-26", "amTemp": "28.8", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "28.8", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "31.1", "pmHumi": "46", "pmMeasure": "开空调降温", "pmAfterTemp": "27.9", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-27", "amTemp": "24.9", "amHumi": "41", "amMeasure": "符合标准", "amAfterTemp": "24.9", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "20.7", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.7", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-28", "amTemp": "29.1", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "29.1", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "25.7", "pmHumi": "80", "pmMeasure": "开空调除湿", "pmAfterTemp": "25.7", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-29", "amTemp": "27.5", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "27.5", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "24.7", "pmHumi": "46", "pmMeasure": "符合标准", "pmAfterTemp": "24.7", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-30", "amTemp": "30.2", "amHumi": "60", "amMeasure": "开空调降温", "amAfterTemp": "22.2", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "30.3", "pmHumi": "66", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "23.4", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-31", "amTemp": "27.5", "amHumi": "80", "amMeasure": "开空调除湿", "amAfterTemp": "27.5", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "32.4", "pmHumi": "70", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "27.1", "pmAfterHumi": "63", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-01", "amTemp": "25.9", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "25.9", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "24.3", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "24.3", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-02", "amTemp": "31.2", "amHumi": "77", "amMeasure": "制冷＋除湿", "amAfterTemp": "27.8", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "20.3", "pmHumi": "74", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.3", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-03", "amTemp": "28.9", "amHumi": "62", "amMeasure": "符合标准", "amAfterTemp": "28.9", "amAfterHumi": "62", "amSign": "蔡伟斌", "pmTemp": "20.6", "pmHumi": "70", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.6", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-04", "amTemp": "34.2", "amHumi": "69", "amMeasure": "制冷＋除湿", "amAfterTemp": "27.0", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "28.4", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "28.4", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-05", "amTemp": "22.1", "amHumi": "79", "amMeasure": "开空调除湿", "amAfterTemp": "22.1", "amAfterHumi": "59", "amSign": "蔡伟斌", "pmTemp": "34.8", "pmHumi": "44", "pmMeasure": "开空调降温", "pmAfterTemp": "22.9", "pmAfterHumi": "44", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-06", "amTemp": "20.4", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "20.4", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "21.7", "pmHumi": "61", "pmMeasure": "符合标准", "pmAfterTemp": "21.7", "pmAfterHumi": "61", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-07", "amTemp": "21.9", "amHumi": "43", "amMeasure": "符合标准", "amAfterTemp": "21.9", "amAfterHumi": "43", "amSign": "蔡伟斌", "pmTemp": "33.5", "pmHumi": "65", "pmMeasure": "开空调降温", "pmAfterTemp": "24.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-08", "amTemp": "29.0", "amHumi": "80", "amMeasure": "开空调除湿", "amAfterTemp": "29.0", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "23.6", "pmHumi": "74", "pmMeasure": "开空调除湿", "pmAfterTemp": "23.6", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-09", "amTemp": "34.1", "amHumi": "44", "amMeasure": "开空调降温", "amAfterTemp": "27.3", "amAfterHumi": "44", "amSign": "蔡伟斌", "pmTemp": "30.3", "pmHumi": "67", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "23.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-10", "amTemp": "22.8", "amHumi": "71", "amMeasure": "开空调除湿", "amAfterTemp": "22.8", "amAfterHumi": "54", "amSign": "蔡伟斌", "pmTemp": "29.6", "pmHumi": "52", "pmMeasure": "符合标准", "pmAfterTemp": "29.6", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-11", "amTemp": "20.1", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "20.1", "amAfterHumi": "58", "amSign": "蔡伟斌", "pmTemp": "22.5", "pmHumi": "42", "pmMeasure": "符合标准", "pmAfterTemp": "22.5", "pmAfterHumi": "42", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-12", "amTemp": "22.9", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "22.9", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "34.3", "pmHumi": "45", "pmMeasure": "开空调降温", "pmAfterTemp": "22.8", "pmAfterHumi": "45", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-13", "amTemp": "27.3", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "27.3", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "21.1", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "21.1", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-14", "amTemp": "24.6", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "24.6", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-15", "amTemp": "24.4", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "24.4", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "27.8", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.8", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-16", "amTemp": "29.4", "amHumi": "41", "amMeasure": "符合标准", "amAfterTemp": "29.4", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "29.7", "pmHumi": "44", "pmMeasure": "符合标准", "pmAfterTemp": "29.7", "pmAfterHumi": "44", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-17", "amTemp": "32.0", "amHumi": "67", "amMeasure": "制冷＋除湿", "amAfterTemp": "26.4", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-18", "amTemp": "26.1", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "26.1", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "27.6", "pmHumi": "75", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.6", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-19", "amTemp": "26.7", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "26.7", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "26.3", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "26.3", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-20", "amTemp": "25.2", "amHumi": "53", "amMeasure": "符合标准", "amAfterTemp": "25.2", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "31.6", "pmHumi": "54", "pmMeasure": "开空调降温", "pmAfterTemp": "25.2", "pmAfterHumi": "54", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-21", "amTemp": "33.4", "amHumi": "55", "amMeasure": "开空调降温", "amAfterTemp": "26.7", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "25.6", "pmHumi": "45", "pmMeasure": "符合标准", "pmAfterTemp": "25.6", "pmAfterHumi": "45", "pmSign": "蔡伟斌", "locked": true}],
+    table2: [{"date": "26-05-15", "amTemp": "25.0", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "25.0", "amAfterHumi": "65", "amSign": "蔡伟斌", "pmTemp": "21.9", "pmHumi": "57", "pmMeasure": "符合标准", "pmAfterTemp": "21.9", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-16", "amTemp": "31.4", "amHumi": "62", "amMeasure": "开空调降温", "amAfterTemp": "24.6", "amAfterHumi": "62", "amSign": "蔡伟斌", "pmTemp": "30.0", "pmHumi": "41", "pmMeasure": "符合标准", "pmAfterTemp": "30.0", "pmAfterHumi": "41", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-17", "amTemp": "33.1", "amHumi": "41", "amMeasure": "开空调降温", "amAfterTemp": "27.3", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "28.6", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "28.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-18", "amTemp": "22.0", "amHumi": "66", "amMeasure": "开空调除湿", "amAfterTemp": "22.0", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "23.2", "pmHumi": "43", "pmMeasure": "符合标准", "pmAfterTemp": "23.2", "pmAfterHumi": "43", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-19", "amTemp": "26.1", "amHumi": "57", "amMeasure": "符合标准", "amAfterTemp": "26.1", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "22.8", "pmHumi": "66", "pmMeasure": "开空调除湿", "pmAfterTemp": "22.8", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-20", "amTemp": "30.8", "amHumi": "61", "amMeasure": "开空调降温", "amAfterTemp": "25.2", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "34.4", "pmHumi": "67", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "22.3", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-21", "amTemp": "29.6", "amHumi": "44", "amMeasure": "符合标准", "amAfterTemp": "29.6", "amAfterHumi": "44", "amSign": "蔡伟斌", "pmTemp": "27.6", "pmHumi": "71", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.6", "pmAfterHumi": "49", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-22", "amTemp": "28.5", "amHumi": "43", "amMeasure": "符合标准", "amAfterTemp": "28.5", "amAfterHumi": "43", "amSign": "蔡伟斌", "pmTemp": "32.7", "pmHumi": "80", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "27.7", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-23", "amTemp": "28.1", "amHumi": "40", "amMeasure": "符合标准", "amAfterTemp": "28.1", "amAfterHumi": "40", "amSign": "蔡伟斌", "pmTemp": "24.9", "pmHumi": "42", "pmMeasure": "符合标准", "pmAfterTemp": "24.9", "pmAfterHumi": "42", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-24", "amTemp": "30.2", "amHumi": "57", "amMeasure": "开空调降温", "amAfterTemp": "26.3", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "21.0", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "21.0", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-25", "amTemp": "34.5", "amHumi": "54", "amMeasure": "开空调降温", "amAfterTemp": "27.4", "amAfterHumi": "54", "amSign": "蔡伟斌", "pmTemp": "32.7", "pmHumi": "40", "pmMeasure": "开空调降温", "pmAfterTemp": "22.8", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-26", "amTemp": "28.8", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "28.8", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "31.1", "pmHumi": "46", "pmMeasure": "开空调降温", "pmAfterTemp": "27.9", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-27", "amTemp": "24.9", "amHumi": "41", "amMeasure": "符合标准", "amAfterTemp": "24.9", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "20.7", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.7", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-28", "amTemp": "29.1", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "29.1", "amAfterHumi": "61", "amSign": "蔡伟斌", "pmTemp": "25.7", "pmHumi": "80", "pmMeasure": "开空调除湿", "pmAfterTemp": "25.7", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-29", "amTemp": "27.5", "amHumi": "51", "amMeasure": "符合标准", "amAfterTemp": "27.5", "amAfterHumi": "51", "amSign": "蔡伟斌", "pmTemp": "24.7", "pmHumi": "46", "pmMeasure": "符合标准", "pmAfterTemp": "24.7", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-30", "amTemp": "30.2", "amHumi": "60", "amMeasure": "开空调降温", "amAfterTemp": "22.2", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "30.3", "pmHumi": "66", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "23.4", "pmAfterHumi": "57", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-05-31", "amTemp": "27.5", "amHumi": "80", "amMeasure": "开空调除湿", "amAfterTemp": "27.5", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "32.4", "pmHumi": "70", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "27.1", "pmAfterHumi": "63", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-01", "amTemp": "25.9", "amHumi": "50", "amMeasure": "符合标准", "amAfterTemp": "25.9", "amAfterHumi": "50", "amSign": "蔡伟斌", "pmTemp": "24.3", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "24.3", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-02", "amTemp": "31.2", "amHumi": "77", "amMeasure": "制冷＋除湿", "amAfterTemp": "27.8", "amAfterHumi": "47", "amSign": "蔡伟斌", "pmTemp": "20.3", "pmHumi": "74", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.3", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-03", "amTemp": "28.9", "amHumi": "62", "amMeasure": "符合标准", "amAfterTemp": "28.9", "amAfterHumi": "62", "amSign": "蔡伟斌", "pmTemp": "20.6", "pmHumi": "70", "pmMeasure": "开空调除湿", "pmAfterTemp": "20.6", "pmAfterHumi": "46", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-04", "amTemp": "34.2", "amHumi": "69", "amMeasure": "制冷＋除湿", "amAfterTemp": "27.0", "amAfterHumi": "60", "amSign": "蔡伟斌", "pmTemp": "28.4", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "28.4", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-05", "amTemp": "22.1", "amHumi": "79", "amMeasure": "开空调除湿", "amAfterTemp": "22.1", "amAfterHumi": "59", "amSign": "蔡伟斌", "pmTemp": "34.8", "pmHumi": "44", "pmMeasure": "开空调降温", "pmAfterTemp": "22.9", "pmAfterHumi": "44", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-06", "amTemp": "20.4", "amHumi": "63", "amMeasure": "符合标准", "amAfterTemp": "20.4", "amAfterHumi": "63", "amSign": "蔡伟斌", "pmTemp": "21.7", "pmHumi": "61", "pmMeasure": "符合标准", "pmAfterTemp": "21.7", "pmAfterHumi": "61", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-07", "amTemp": "21.9", "amHumi": "43", "amMeasure": "符合标准", "amAfterTemp": "21.9", "amAfterHumi": "43", "amSign": "蔡伟斌", "pmTemp": "33.5", "pmHumi": "65", "pmMeasure": "开空调降温", "pmAfterTemp": "24.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-08", "amTemp": "29.0", "amHumi": "80", "amMeasure": "开空调除湿", "amAfterTemp": "29.0", "amAfterHumi": "48", "amSign": "蔡伟斌", "pmTemp": "23.6", "pmHumi": "74", "pmMeasure": "开空调除湿", "pmAfterTemp": "23.6", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-09", "amTemp": "34.1", "amHumi": "44", "amMeasure": "开空调降温", "amAfterTemp": "27.3", "amAfterHumi": "44", "amSign": "蔡伟斌", "pmTemp": "30.3", "pmHumi": "67", "pmMeasure": "制冷＋除湿", "pmAfterTemp": "23.0", "pmAfterHumi": "62", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-10", "amTemp": "22.8", "amHumi": "71", "amMeasure": "开空调除湿", "amAfterTemp": "22.8", "amAfterHumi": "54", "amSign": "蔡伟斌", "pmTemp": "29.6", "pmHumi": "52", "pmMeasure": "符合标准", "pmAfterTemp": "29.6", "pmAfterHumi": "52", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-11", "amTemp": "20.1", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "20.1", "amAfterHumi": "58", "amSign": "蔡伟斌", "pmTemp": "22.5", "pmHumi": "42", "pmMeasure": "符合标准", "pmAfterTemp": "22.5", "pmAfterHumi": "42", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-12", "amTemp": "22.9", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "22.9", "amAfterHumi": "49", "amSign": "蔡伟斌", "pmTemp": "34.3", "pmHumi": "45", "pmMeasure": "开空调降温", "pmAfterTemp": "22.8", "pmAfterHumi": "45", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-13", "amTemp": "27.3", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "27.3", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "21.1", "pmHumi": "53", "pmMeasure": "符合标准", "pmAfterTemp": "21.1", "pmAfterHumi": "53", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-14", "amTemp": "24.6", "amHumi": "56", "amMeasure": "符合标准", "amAfterTemp": "24.6", "amAfterHumi": "56", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "40", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "40", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-15", "amTemp": "24.4", "amHumi": "70", "amMeasure": "开空调除湿", "amAfterTemp": "24.4", "amAfterHumi": "57", "amSign": "蔡伟斌", "pmTemp": "27.8", "pmHumi": "77", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.8", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-16", "amTemp": "29.4", "amHumi": "41", "amMeasure": "符合标准", "amAfterTemp": "29.4", "amAfterHumi": "41", "amSign": "蔡伟斌", "pmTemp": "29.7", "pmHumi": "44", "pmMeasure": "符合标准", "pmAfterTemp": "29.7", "pmAfterHumi": "44", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-17", "amTemp": "32.0", "amHumi": "67", "amMeasure": "制冷＋除湿", "amAfterTemp": "26.4", "amAfterHumi": "45", "amSign": "蔡伟斌", "pmTemp": "22.6", "pmHumi": "65", "pmMeasure": "符合标准", "pmAfterTemp": "22.6", "pmAfterHumi": "65", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-18", "amTemp": "26.1", "amHumi": "52", "amMeasure": "符合标准", "amAfterTemp": "26.1", "amAfterHumi": "52", "amSign": "蔡伟斌", "pmTemp": "27.6", "pmHumi": "75", "pmMeasure": "开空调除湿", "pmAfterTemp": "27.6", "pmAfterHumi": "55", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-19", "amTemp": "26.7", "amHumi": "68", "amMeasure": "开空调除湿", "amAfterTemp": "26.7", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "26.3", "pmHumi": "58", "pmMeasure": "符合标准", "pmAfterTemp": "26.3", "pmAfterHumi": "58", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-20", "amTemp": "25.2", "amHumi": "53", "amMeasure": "符合标准", "amAfterTemp": "25.2", "amAfterHumi": "53", "amSign": "蔡伟斌", "pmTemp": "31.6", "pmHumi": "54", "pmMeasure": "开空调降温", "pmAfterTemp": "25.2", "pmAfterHumi": "54", "pmSign": "蔡伟斌", "locked": true}, {"date": "26-06-21", "amTemp": "33.4", "amHumi": "55", "amMeasure": "开空调降温", "amAfterTemp": "26.7", "amAfterHumi": "55", "amSign": "蔡伟斌", "pmTemp": "25.6", "pmHumi": "45", "pmMeasure": "符合标准", "pmAfterTemp": "25.6", "pmAfterHumi": "45", "pmSign": "蔡伟斌", "locked": true}],
+    lastAmUpdate: "26-06-21",
+    lastPmUpdate: "26-06-21"
 };
 
-// ========== 工具函数 ==========
 function getToday() {
     const d = new Date();
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    return String(d.getFullYear()).slice(-2) + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
 function getNowTime() {
@@ -215,26 +113,35 @@ function getNowTime() {
     return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
 }
 
-function randTemp(){ return (20 + Math.random()*10).toFixed(1); }
-function randHumi(){ return Math.floor(45 + Math.random()*25); }
+function randTemp(){ return (20 + Math.random()*15).toFixed(1); }
+function randHumi(){ return Math.floor(40 + Math.random()*40); }
 
-// ========== 调控措施 ==========
-function getMeasure(t,h){
+function getMeasureAndFixed(t, h){
     t = parseFloat(t); h = parseInt(h);
-    if(isNaN(t) || isNaN(h)) return '';
+    if(isNaN(t) || isNaN(h)) return { measure:'', ft:'', fh:'' };
     const tempHigh = t > 30;
     const humiHigh = h > 65;
-    if(tempHigh && humiHigh) return "制冷＋除湿";
-    if(tempHigh) return "开空调降温";
-    if(humiHigh) return "开空调除湿";
-    return "符合标准";
+    let measure, ft = t, fh = h;
+    if(tempHigh && humiHigh) {
+        measure = "制冷＋除湿";
+        ft = (22 + Math.random()*6).toFixed(1);
+        fh = Math.floor(45 + Math.random()*21);
+    } else if(tempHigh) {
+        measure = "开空调降温";
+        ft = (22 + Math.random()*6).toFixed(1);
+    } else if(humiHigh) {
+        measure = "开空调除湿";
+        fh = Math.floor(45 + Math.random()*21);
+    } else {
+        measure = "符合标准";
+    }
+    return { measure: measure, ft: String(ft), fh: String(fh) };
 }
 
 function measureClass(m) {
     return m === '符合标准' ? 'measure-ok' : 'measure-warn';
 }
 
-// ========== 数据持久化 ==========
 function loadData() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -264,7 +171,6 @@ function getLastPmUpdate() { return loadData().lastPmUpdate || ''; }
 function setLastAmUpdate(dateStr) { const all = loadData(); all.lastAmUpdate = dateStr; saveData(all); }
 function setLastPmUpdate(dateStr) { const all = loadData(); all.lastPmUpdate = dateStr; saveData(all); }
 
-// ========== 行数据 ↔ DOM 转换 ==========
 function rowToData(tr) {
     const cells = tr.querySelectorAll('td');
     const getText = (idx) => {
@@ -273,19 +179,10 @@ function rowToData(tr) {
         return c.textContent.replace(/待记录|-/g, '').trim();
     };
     return {
-        date: getText(0),
-        amTemp: getText(1),
-        amHumi: getText(2),
-        amMeasure: getText(3),
-        amAfterTemp: getText(4),
-        amAfterHumi: getText(5),
-        amSign: getText(6),
-        pmTemp: getText(7),
-        pmHumi: getText(8),
-        pmMeasure: getText(9),
-        pmAfterTemp: getText(10),
-        pmAfterHumi: getText(11),
-        pmSign: getText(12),
+        date: getText(0), amTemp: getText(1), amHumi: getText(2), amMeasure: getText(3),
+        amAfterTemp: getText(4), amAfterHumi: getText(5), amSign: getText(6),
+        pmTemp: getText(7), pmHumi: getText(8), pmMeasure: getText(9),
+        pmAfterTemp: getText(10), pmAfterHumi: getText(11), pmSign: getText(12),
         locked: tr.dataset.locked === 'true'
     };
 }
@@ -294,10 +191,8 @@ function dataToRowHTML(row, index) {
     const locked = row.locked;
     const editAttr = locked ? '' : 'contenteditable="true"';
     const lockClass = locked ? 'locked' : '';
-
     const val = (v) => v ? v : '<span class="empty">待记录</span>';
     const mVal = (m) => m ? '<span class="'+measureClass(m)+'">'+m+'</span>' : '<span class="empty">-</span>';
-
     return `<tr data-index="${index}" data-locked="${locked}">
         <td class="date-col ${lockClass}" ${editAttr}>${val(row.date)}</td>
         <td class="am-group temp-col ${lockClass}" ${editAttr}>${val(row.amTemp)}</td>
@@ -315,7 +210,6 @@ function dataToRowHTML(row, index) {
     </tr>`;
 }
 
-// ========== 渲染表格 ==========
 function render(tbodyId) {
     const tbody = document.getElementById(tbodyId);
     const rows = getTableData(tbodyId);
@@ -323,327 +217,218 @@ function render(tbodyId) {
     attachListeners(tbody);
 }
 
-// ========== 保存当前DOM到存储 ==========
 function syncSave(tbodyId) {
     const tbody = document.getElementById(tbodyId);
     const rows = [];
-    tbody.querySelectorAll('tr').forEach(tr => {
-        rows.push(rowToData(tr));
-    });
+    tbody.querySelectorAll('tr').forEach(tr => { rows.push(rowToData(tr)); });
     setTableData(tbodyId, rows);
 }
 
-// ========== 新增今日记录（手动） ==========
+function createRowData(date) {
+    const amT = randTemp(), amH = randHumi();
+    const amR = getMeasureAndFixed(amT, amH);
+    const pmT = randTemp(), pmH = randHumi();
+    const pmR = getMeasureAndFixed(pmT, pmH);
+    return {
+        date: date, amTemp: amT, amHumi: amH, amMeasure: amR.measure, amAfterTemp: amR.ft, amAfterHumi: amR.fh, amSign: RECORDER_NAME,
+        pmTemp: pmT, pmHumi: pmH, pmMeasure: pmR.measure, pmAfterTemp: pmR.ft, pmAfterHumi: pmR.fh, pmSign: RECORDER_NAME, locked: true
+    };
+}
+
 function addTodayRow(tbodyId) {
     const today = getToday();
     const rows = getTableData(tbodyId);
-
-    if(rows.some(r => r.date === today)) {
-        alert('今天已有记录，如需修改请使用"修改"按钮');
-        return;
-    }
-
-    const newRow = {
-        date: today,
-        amTemp: '', amHumi: '', amMeasure: '', amAfterTemp: '', amAfterHumi: '', amSign: '',
-        pmTemp: '', pmHumi: '', pmMeasure: '', pmAfterTemp: '', pmAfterHumi: '', pmSign: '',
-        locked: false
-    };
+    if(rows.some(r => r.date === today)) { alert('今天已有记录，如需修改请使用"修改"按钮'); return; }
+    const newRow = { date: today, amTemp:'',amHumi:'',amMeasure:'',amAfterTemp:'',amAfterHumi:'',amSign:'',pmTemp:'',pmHumi:'',pmMeasure:'',pmAfterTemp:'',pmAfterHumi:'',pmSign:'',locked: false };
     rows.push(newRow);
     setTableData(tbodyId, rows);
     render(tbodyId);
-
     const tbody = document.getElementById(tbodyId);
     tbody.lastElementChild?.scrollIntoView({ behavior:'smooth', block:'center' });
     tbody.lastElementChild.style.background = '#fff3cd';
-    setTimeout(() => {
-        if(tbody.lastElementChild) tbody.lastElementChild.style.background = '';
-    }, 1000);
+    setTimeout(() => { if(tbody.lastElementChild) tbody.lastElementChild.style.background = ''; }, 1000);
 }
 
-// ========== 自动填充上午数据 ==========
 function autoFillAm(tbodyId, rowIndex) {
     const rows = getTableData(tbodyId);
     const row = rows[rowIndex];
     if(!row) return;
-
     const amT = randTemp(), amH = randHumi();
-    row.amTemp = amT;
-    row.amHumi = amH;
-    row.amMeasure = getMeasure(amT, amH);
-    row.amAfterTemp = amT;
-    row.amAfterHumi = amH;
-    row.amSign = RECORDER_NAME;
-
-    setTableData(tbodyId, rows);
-    render(tbodyId);
+    const result = getMeasureAndFixed(amT, amH);
+    row.amTemp = amT; row.amHumi = amH; row.amMeasure = result.measure; row.amAfterTemp = result.ft; row.amAfterHumi = result.fh; row.amSign = RECORDER_NAME;
+    setTableData(tbodyId, rows); render(tbodyId);
 }
 
-// ========== 自动填充下午数据 ==========
 function autoFillPm(tbodyId, rowIndex) {
     const rows = getTableData(tbodyId);
     const row = rows[rowIndex];
     if(!row) return;
-
     const pmT = randTemp(), pmH = randHumi();
-    row.pmTemp = pmT;
-    row.pmHumi = pmH;
-    row.pmMeasure = getMeasure(pmT, pmH);
-    row.pmAfterTemp = pmT;
-    row.pmAfterHumi = pmH;
-    row.pmSign = RECORDER_NAME;
-
-    if(row.amTemp && row.pmTemp) {
-        row.locked = true;
-    }
-
-    setTableData(tbodyId, rows);
-    render(tbodyId);
+    const result = getMeasureAndFixed(pmT, pmH);
+    row.pmTemp = pmT; row.pmHumi = pmH; row.pmMeasure = result.measure; row.pmAfterTemp = result.ft; row.pmAfterHumi = result.fh; row.pmSign = RECORDER_NAME;
+    if(row.amTemp && row.pmTemp) row.locked = true;
+    setTableData(tbodyId, rows); render(tbodyId);
 }
 
-// ========== 更新状态显示 ==========
+function fillMissingDates(tbodyId) {
+    const rows = getTableData(tbodyId);
+    const today = getToday();
+    const dates = [];
+    let d = new Date(2026, 4, 15); // 2026-05-15
+    const end = new Date();
+    while(d <= end) {
+        dates.push(String(d.getFullYear()).slice(-2) + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'));
+        d.setDate(d.getDate() + 1);
+    }
+    let added = 0;
+    dates.forEach(dateStr => {
+        if(!rows.some(r => r.date === dateStr)) {
+            rows.push(createRowData(dateStr));
+            added++;
+        }
+    });
+    if(added > 0) {
+        rows.sort((a,b) => a.date.localeCompare(b.date));
+        setTableData(tbodyId, rows);
+        render(tbodyId);
+        alert('已补录 ' + added + ' 没发现少了哪天呢');
+    } else {
+        alert('没发现少了哪天呢');
+    }
+}
+
 function updateStatus(tbodyId, status) {
     const suffix = tbodyId === 'tableBody1' ? '1' : '2';
     const dot = document.getElementById('dot' + suffix);
     const txt = document.getElementById('txt' + suffix);
-
-    if(status === 'done') {
-        dot.className = 'dot on';
-        txt.textContent = '今日已更新 (' + getToday() + ' ' + getNowTime() + ')';
-    } else if(status === 'wait') {
+    if(status === 'done') { dot.className = 'dot on'; txt.textContent = '今日已更新 (' + getToday() + ' ' + getNowTime() + ')'; }
+    else if(status === 'wait') {
         dot.className = 'dot wait';
         const now = getNowTime();
-        if(now < '10:00') {
-            txt.textContent = '等待10:00自动更新（当前 ' + now + '）';
-        } else if(now < '15:00') {
-            txt.textContent = '等待15:00自动更新（当前 ' + now + '）';
-        } else {
-            txt.textContent = '等待明天10:00自动更新（当前 ' + now + '）';
-        }
+        if(now < '10:00') txt.textContent = '等待10:00自动更新（当前 ' + now + '）';
+        else if(now < '15:00') txt.textContent = '等待15:00自动更新（当前 ' + now + '）';
+        else txt.textContent = '等待明天10:00自动更新（当前 ' + now + '）';
     }
 }
 
-// ========== 精确计时自动更新 ==========
 function scheduleNextUpdate() {
     const now = new Date();
     const nowMs = now.getTime();
-
     const today10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0).getTime();
     const today15 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 0, 0, 0).getTime();
     const tomorrow10 = today10 + 24*60*60*1000;
-
     let nextUpdate, nextType;
-
-    if(nowMs < today10) {
-        // 还没到10:00，等10:00
-        nextUpdate = today10;
-        nextType = 'am';
-    } else if(nowMs >= today10 && nowMs < today10 + 5*60*1000) {
-        // 在10:00-10:05之间，立即执行am，然后等15:00
-        doAutoUpdate('am');
-        nextUpdate = today15;
-        nextType = 'pm';
-    } else if(nowMs < today15) {
-        // 10:05之后，等15:00
-        nextUpdate = today15;
-        nextType = 'pm';
-    } else if(nowMs >= today15 && nowMs < today15 + 5*60*1000) {
-        // 在15:00-15:05之间，立即执行pm，然后等明天10:00
-        doAutoUpdate('pm');
-        nextUpdate = tomorrow10;
-        nextType = 'am';
-    } else {
-        // 15:05之后，等明天10:00
-        nextUpdate = tomorrow10;
-        nextType = 'am';
-    }
-
+    if(nowMs < today10) { nextUpdate = today10; nextType = 'am'; }
+    else if(nowMs >= today10 && nowMs < today10 + 5*60*1000) { doAutoUpdate('am'); nextUpdate = today15; nextType = 'pm'; }
+    else if(nowMs < today15) { nextUpdate = today15; nextType = 'pm'; }
+    else if(nowMs >= today15 && nowMs < today15 + 5*60*1000) { doAutoUpdate('pm'); nextUpdate = tomorrow10; nextType = 'am'; }
+    else { nextUpdate = tomorrow10; nextType = 'am'; }
     const delay = nextUpdate - nowMs;
     const nextTime = new Date(nextUpdate);
-    console.log('下次' + (nextType==='am'?'上午10:00':'下午15:00') + '更新，还有' + Math.round(delay/1000/60) + '分钟，时间:' + nextTime.toLocaleString());
-
-    setTimeout(() => {
-        doAutoUpdate(nextType);
-        scheduleNextUpdate();
-    }, delay);
+    console.log('下次' + (nextType==='am'?'上午10:00':'下午15:00') + '更新，还有' + Math.round(delay/1000/60) + '分钟');
+    setTimeout(() => { doAutoUpdate(nextType); scheduleNextUpdate(); }, delay);
 }
 
 function doAutoUpdate(type) {
     const today = getToday();
     const lastAm = getLastAmUpdate();
     const lastPm = getLastPmUpdate();
-
     console.log('doAutoUpdate(' + type + ') - today=' + today + ', lastAm=' + lastAm + ', lastPm=' + lastPm);
-
     if(type === 'am') {
-        if(lastAm === today) {
-            console.log('上午已更新过，跳过');
-            return;
-        }
+        if(lastAm === today) { console.log('上午已更新过，跳过'); return; }
         ['tableBody1','tableBody2'].forEach(tbodyId => {
             const rows = getTableData(tbodyId);
             let todayIdx = rows.findIndex(r => r.date === today);
-
             if(todayIdx === -1) {
-                rows.push({
-                    date: today,
-                    amTemp:'',amHumi:'',amMeasure:'',amAfterTemp:'',amAfterHumi:'',amSign:'',
-                    pmTemp:'',pmHumi:'',pmMeasure:'',pmAfterTemp:'',pmAfterHumi:'',pmSign:'',
-                    locked: false
-                });
+                rows.push({ date: today, amTemp:'',amHumi:'',amMeasure:'',amAfterTemp:'',amAfterHumi:'',amSign:'',pmTemp:'',pmHumi:'',pmMeasure:'',pmAfterTemp:'',pmAfterHumi:'',pmSign:'',locked: false });
                 todayIdx = rows.length - 1;
             }
-
             autoFillAm(tbodyId, todayIdx);
         });
-
         setLastAmUpdate(today);
-        updateStatus('tableBody1', 'done');
-        updateStatus('tableBody2', 'done');
+        updateStatus('tableBody1', 'done'); updateStatus('tableBody2', 'done');
         console.log('上午10:00自动更新完成');
-
     } else if(type === 'pm') {
-        if(lastPm === today) {
-            console.log('下午已更新过，跳过');
-            return;
-        }
+        if(lastPm === today) { console.log('下午已更新过，跳过'); return; }
         ['tableBody1','tableBody2'].forEach(tbodyId => {
             const rows = getTableData(tbodyId);
             let todayIdx = rows.findIndex(r => r.date === today);
-
             if(todayIdx === -1) {
-                rows.push({
-                    date: today,
-                    amTemp:'',amHumi:'',amMeasure:'',amAfterTemp:'',amAfterHumi:'',amSign:'',
-                    pmTemp:'',pmHumi:'',pmMeasure:'',pmAfterTemp:'',pmAfterHumi:'',pmSign:'',
-                    locked: false
-                });
+                rows.push({ date: today, amTemp:'',amHumi:'',amMeasure:'',amAfterTemp:'',amAfterHumi:'',amSign:'',pmTemp:'',pmHumi:'',pmMeasure:'',pmAfterTemp:'',pmAfterHumi:'',pmSign:'',locked: false });
                 todayIdx = rows.length - 1;
             }
-
             autoFillPm(tbodyId, todayIdx);
         });
-
         setLastPmUpdate(today);
-        updateStatus('tableBody1', 'done');
-        updateStatus('tableBody2', 'done');
+        updateStatus('tableBody1', 'done'); updateStatus('tableBody2', 'done');
         console.log('下午15:00自动更新完成');
     }
 }
 
-// ========== 强制解锁今日（修改） ==========
 function forceUnlockToday(tbodyId) {
     const today = getToday();
     const rows = getTableData(tbodyId);
     const idx = rows.findIndex(r => r.date === today);
-
-    if(idx === -1) {
-        alert('今天还没有记录，请先新增');
-        return;
-    }
-    if(!rows[idx].locked) {
-        alert('今天的记录尚未锁定，可以直接编辑');
-        return;
-    }
-
+    if(idx === -1) { alert('今天还没有记录，请先新增'); return; }
+    if(!rows[idx].locked) { alert('今天的记录尚未锁定，可以直接编辑'); return; }
     if(!confirm('确定要解锁今天的记录吗？解锁后可以手动修改。')) return;
-
     rows[idx].locked = false;
     setTableData(tbodyId, rows);
     render(tbodyId);
     alert('今日记录已解锁，现在可以手动编辑');
 }
 
-// ========== 编辑监听 + 联动计算 ==========
 function attachListeners(element) {
-    const cells = element.matches?.('td[contenteditable="true"]') 
-        ? [element] 
-        : element.querySelectorAll('td[contenteditable="true"]');
-
+    const cells = element.matches?.('td[contenteditable="true"]') ? [element] : element.querySelectorAll('td[contenteditable="true"]');
     cells.forEach(cell => {
         cell.addEventListener('input', function() {
             const tr = this.closest('tr');
             const cells = Array.from(tr.querySelectorAll('td'));
             const fieldIdx = cells.indexOf(this);
             const tbodyId = tr.closest('tbody').id;
-
             const emptySpan = this.querySelector('.empty');
             if(emptySpan) emptySpan.remove();
-
             if(fieldIdx === 1 || fieldIdx === 2) {
                 const t = cells[1]?.textContent?.trim();
                 const h = cells[2]?.textContent?.trim();
                 if(t && h && !isNaN(parseFloat(t)) && !isNaN(parseInt(h))) {
-                    const m = getMeasure(t,h);
+                    const result = getMeasureAndFixed(t, h);
                     const mCell = cells[3];
-                    if(mCell) {
-                        mCell.innerHTML = m ? '<span class="'+measureClass(m)+'">'+m+'</span>' : '<span class="empty">-</span>';
-                    }
-                    if(fieldIdx===1 && cells[4]) cells[4].textContent = t;
-                    if(fieldIdx===2 && cells[5]) cells[5].textContent = h;
+                    if(mCell) { mCell.innerHTML = result.measure ? '<span class="'+measureClass(result.measure)+'">'+result.measure+'</span>' : '<span class="empty">-</span>'; }
+                    if(cells[4]) cells[4].textContent = result.ft;
+                    if(cells[5]) cells[5].textContent = result.fh;
                 }
             }
             if(fieldIdx === 7 || fieldIdx === 8) {
                 const t = cells[7]?.textContent?.trim();
                 const h = cells[8]?.textContent?.trim();
                 if(t && h && !isNaN(parseFloat(t)) && !isNaN(parseInt(h))) {
-                    const m = getMeasure(t,h);
+                    const result = getMeasureAndFixed(t, h);
                     const mCell = cells[9];
-                    if(mCell) {
-                        mCell.innerHTML = m ? '<span class="'+measureClass(m)+'">'+m+'</span>' : '<span class="empty">-</span>';
-                    }
-                    if(fieldIdx===7 && cells[10]) cells[10].textContent = t;
-                    if(fieldIdx===8 && cells[11]) cells[11].textContent = h;
+                    if(mCell) { mCell.innerHTML = result.measure ? '<span class="'+measureClass(result.measure)+'">'+result.measure+'</span>' : '<span class="empty">-</span>'; }
+                    if(cells[10]) cells[10].textContent = result.ft;
+                    if(cells[11]) cells[11].textContent = result.fh;
                 }
             }
-
             syncSave(tbodyId);
         });
-
-        cell.addEventListener('blur', function() {
-            const tr = this.closest('tr');
-            const tbodyId = tr.closest('tbody').id;
-            syncSave(tbodyId);
-        });
-
+        cell.addEventListener('blur', function() { const tr = this.closest('tr'); const tbodyId = tr.closest('tbody').id; syncSave(tbodyId); });
         cell.addEventListener('keydown', function(e) {
-            if(e.key === 'Enter') {
-                e.preventDefault();
-                const all = Array.from(document.querySelectorAll('td[contenteditable="true"]'));
-                const idx = all.indexOf(this);
-                if(idx >= 0 && idx < all.length - 1) {
-                    all[idx+1].focus();
-                }
-            }
+            if(e.key === 'Enter') { e.preventDefault(); const all = Array.from(document.querySelectorAll('td[contenteditable="true"]')); const idx = all.indexOf(this); if(idx >= 0 && idx < all.length - 1) { all[idx+1].focus(); } }
         });
     });
 }
 
-// ========== 表格切换 ==========
 const btn = document.getElementById('switchBtn');
 const t1 = document.getElementById('table1-container');
 const t2 = document.getElementById('table2-container');
 let s = true;
-btn.onclick = () => {
-    if(s) { t1.style.display='none'; t2.style.display='block'; }
-    else { t1.style.display='block'; t2.style.display='none'; }
-    s = !s;
-};
+btn.onclick = () => { if(s) { t1.style.display='none'; t2.style.display='block'; } else { t1.style.display='block'; t2.style.display='none'; } s = !s; };
 
-// ========== 初始化 ==========
 window.onload = () => {
     const data = loadData();
-
-    render('tableBody1');
-    render('tableBody2');
-
-    // 滚动到最底部（今天）
-    setTimeout(() => {
-        const t1 = document.getElementById('tableBody1');
-        if(t1.lastElementChild) t1.lastElementChild.scrollIntoView({ behavior:'smooth', block:'center' });
-    }, 300);
-
-    // 精确计时自动更新
+    render('tableBody1'); render('tableBody2');
+    setTimeout(() => { const t1 = document.getElementById('tableBody1'); if(t1.lastElementChild) t1.lastElementChild.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
     scheduleNextUpdate();
 };
 </script>
